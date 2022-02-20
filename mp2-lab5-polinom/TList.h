@@ -59,8 +59,7 @@ public:
 	void DeleteList();
 	void DeleteCurrent();
 	void DeleteFirst();
-	
-
+	void DeleteLast();
 
 	//void DeleteLast()
 	//{
