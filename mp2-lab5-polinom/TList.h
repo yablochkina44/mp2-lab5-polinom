@@ -1,5 +1,6 @@
 #pragma once
 #include "TNode.h"
+#include "MyException.h"
 #include <iostream>
 using namespace std;
 
@@ -7,116 +8,58 @@ template <class T>
 class TList
 {
 protected:
-	//TNode<T>* pHead;
+	TNode<T>* pHead;
 	TNode<T>* pFirst;		//указатель на первый элемент
 	TNode<T>* pCurr;		//указатель на текущий элемент
-	TNode<T>* pPrevCurr;   //указатель на предыдущий текущему элемент
+	TNode<T>* pPrevCurr;    //указатель на предыдущий текущему элемент
 	TNode<T>* pLast;		//указатель на последний элемент
 	TNode<T>* pStop;		//указатель на голову в циклическом списке
 	int len;				//длина списка
+	int pos;				//номер текущего элемента
 
 public:
 	TList()
 	{
-		pFirst = NULL;
-		pCurr = NULL;
-		pPrevCurr = NULL;
-		pLast = NULL;
-		pStop = NULL;
+		pHead = new TNode <T>;
+		pStop = pHead;
+		pHead->pNext = pStop;
+		pFirst = pLast = pCurr = pPrevCurr = NULL;
+		pos = -1;
 		len = 0;
 	}
+	~TList()
+	{
+		if (len != 0)
+		{
+			pCurr = pFirst;
+			while (pCurr != pStop)
+			{
+				pPrevCurr = pCurr;
+				pCurr = pCurr->pNext;
+				delete pPrevCurr;
+			}
+		}
+		delete pHead;
+	}
+
+	void Reset();
+	void GoNext();
+
+	bool IsListEmpty();
+	bool IsListEnded(void) const;
+
+	T GetValueCurrent();
+	void SetValueCurrent(T v);
+	void SetCurrPos(int _pos);
+
+	void InsFirst(T val);
+	void InsLast(T val);
+	void InsCurrent(T val);
 	
-
-	T GetValueCurrent()
-	{
-		if (pCurr != pStop)
-			return pCurr->value;
-	}
-
-	void SetValueCurrent(T v)
-	{
-		if (pCurr != pStop)
-			pCurr->value = v;
-	}
-
-	void InsFirst(T val)
-	{
-		TNode<T>* newFirst = new TNode<T>;
-		newFirst->value = val;
-		newFirst->pNext = pFirst;
-
-		pFirst = newFirst;
-		if (len == 1)
-			pLast = pFirst;
-		len++;
-
-	}
-
-	void InsLast(T val)
-	{
-		TNode <T>* newLast = new TNode <T>;
-		newLast->value = val;
-		newLast->pNext = pStop;
-		if (pLast != pStop)
-			pLast->pNext = newLast;
-		else
-			pFirst = newLast;
-		pLast = newLast;
-		len++;
-	}
-
-	void InsCurrent(T val)
-	{
-		if (pCurr == pFirst)
-			InsFirst(val);
-		else if (pPrevCurr == pLast)
-			InsLast(val);
-		else
-		{
-			TNode<T>* pNew = new TNode<T>(val,pCurr);
-			pPrevCurr->pNext = pNew;
-			pCurr = pNew;
-			len++;
-		}
-
-	}
-
-	void DeleteCurrent()
-	{
-
-		if (pCurr == pFirst)
-			DelFirst();
-		else if (pCurr != pStop)
-		{
-			pPrevCurr->pNext = pCurr->pNext;
-			delete pCurr;
-			pCurr = pPrevCurr->pNext;
-			len--;
-		}
-
-	}
-
-	void DeleteFirst()
-	{
-		/*if (len != 0)
-		{
-			if (pCurr != pFirst)
-			{
-				pHead->pNext = pFirst->pNext;
-				delete pFirst;
-				pFirst = pHead->pNext;
-				len--;
-				
-			}
-			else
-			{
-				pHead->pNext = pFirst->pNext;
-				delete pFirst;
-				pCurr = pFirst = pHead->pNext;
-				len--;
-			}
-		}*/
-	}
+	void DeleteList();
+	void DeleteCurrent();
+	void DeleteFirst();
+	
 
 
 	//void DeleteLast()
