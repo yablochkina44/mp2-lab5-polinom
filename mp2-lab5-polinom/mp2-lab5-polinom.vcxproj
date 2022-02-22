@@ -141,10 +141,13 @@
   <ItemGroup>
     <ClInclude Include="MyException.h" />
     <ClInclude Include="TDataCom.h" />
+    <ClInclude Include="THeadList.h" />
     <ClInclude Include="TList.h" />
+    <ClInclude Include="TMonom.h" />
     <ClInclude Include="TNode.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="THeadList.cpp" />
     <ClCompile Include="TList.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
