@@ -1,5 +1,4 @@
 #pragma once
-#include "TNode.h"
 #include "TList.h"
 #include "MyException.h"
 #include <iostream>
@@ -37,11 +36,6 @@ public:
 	}
 
 	void InsFirst(T val);
-	void InsLast(T val);
-	void InsCurrent(T val);
-
-	void DeleteList();
-	void DeleteCurrent();
 	void DeleteFirst();
 	
 
@@ -66,53 +60,8 @@ void THeadList<T>::InsFirst(T val)
 {
 	TList::InsFirst(val);
 	pHead->pNext = pFirst;
-
 }
 
-
-template<class T>
-void THeadList<T>::InsCurrent(T val)
-{
-	if (pCurr == pFirst)
-		InsFirst(val);
-	else if (pPrevCurr == pLast)
-		InsLast(val);
-	else
-	{
-		TNode<T>* pNew = new TNode<T>(val, pCurr);
-		pPrevCurr->pNext = pNew;
-		pCurr = pNew;
-		len++;
-	}
-
-}
-
-template<class T>
-void THeadList<T>::DeleteList()
-{
-	while (!IsListEmpty)
-	{
-		DeleteFirst();
-	}
-	pFirst = pLast = pCurr = pPrevCurr = pStop;
-	pos = -1;
-}
-
-template<class T>
-void THeadList<T>::DeleteCurrent()
-{
-
-	if (pCurr == pFirst)
-		DeleteFirst();
-	else if (pCurr != pStop)
-	{
-		pPrevCurr->pNext = pCurr->pNext;
-		delete pCurr;
-		pCurr = pPrevCurr->pNext;
-		len--;
-	}
-
-}
 
 template<class T>
 void THeadList<T>::DeleteFirst()
