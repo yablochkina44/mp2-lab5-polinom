@@ -1,11 +1,12 @@
 #pragma once
+#include "TNode.h"
 #include "TList.h"
 #include "MyException.h"
 #include <iostream>
 using namespace std;
 
 template <class T>
-class THeadList:public TList<T>
+class THeadList: public TList<T>
 {
 protected:
 	TNode<T>* pHead;
@@ -16,7 +17,7 @@ public:
 		pHead = new TNode <T>;
 		pStop = pHead;
 		pHead->pNext = pStop;
-		pFirst = pLast = pCurr = pPrevCurr = NULL;
+		pFirst = pLast = pCurr = pPrevCurr = pStop;
 		pos = -1;
 		len = 0;
 	}
