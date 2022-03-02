@@ -26,7 +26,15 @@ public:
 	}
 	~TList()
 	{
-		if (len != 0)
+		TNode<T>* tmp = pFirst;
+		while (pFirst != pStop)
+		{
+			pFirst = pFirst->pNext;
+			delete tmp;
+			tmp = pFirst;
+		}
+
+		/*if (len != 0)
 		{
 			pCurr = pFirst;
 			while (pCurr != pStop)
@@ -35,8 +43,24 @@ public:
 				pCurr = pCurr->pNext;
 				delete del;
 			}
-		}
+		}*/
 	}
+
+	/*TList(const TList<T>& c)
+	{
+		TNode<T>* tmp = c.pFirst;
+		if (tmp == pStop)
+		{
+			pFirst = tmp;
+		}
+		while (tmp != pStop)
+		{
+			Push(tmp->val);
+			tmp = tmp->pNext;
+		}
+		delete tmp;
+	}*/
+
 
 	void Reset();
 	void GoNext();
@@ -119,10 +143,13 @@ void TList<T>::SetCurrPos(int _pos)
 }
 
 
+//с лекции переписано 
 template<class T>
 void TList<T>::InsFirst(T val)
 {
-	TNode<T>* tmp = new TNode<T>(val, pFirst);
+	TNode<T>* tmp = new TNode<T>;
+	tmp->value = val;
+	tmp->pNext = pFirst;
 	if (tmp == NULL)
 		throw MyException("List empty");
 	else
@@ -176,7 +203,9 @@ void TList<T>::InsCurrent(T val)
 		InsLast(val);
 	else
 	{
-		TNode<T>* pNew = new TNode<T>(val, pCurr);
+		TNode<T>* pNew = new TNode<T>;
+		pNew->value = val;
+		pNew->pNext = pCurr;
 		pPrevCurr->pNext = pNew;
 		pCurr = pNew;
 		len++;
@@ -199,18 +228,21 @@ template<class T>
 void TList<T>::DeleteCurrent()
 {
 
+	if (pCurr == pStop) throw MyException("Error DelCurr: Stop");
 	if (pCurr == pFirst)
 		DeleteFirst();
-	else if (pCurr != pStop)
+	else
 	{
 		pPrevCurr->pNext = pCurr->pNext;
 		delete pCurr;
 		pCurr = pPrevCurr->pNext;
 		len--;
 	}
+	
 
 }
 
+//с лекции
 template<class T>
 void TList<T>::DeleteFirst()
 {
@@ -219,7 +251,7 @@ void TList<T>::DeleteFirst()
 	else
 	{
 		TNode<T>* tmp = pFirst;
-		pFirst = pFirst->pNext();
+		pFirst = pFirst->pNext;
 		delete tmp;
 		len--;
 		if (IsListEmpty())

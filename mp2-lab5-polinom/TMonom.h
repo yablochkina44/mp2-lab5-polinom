@@ -1,7 +1,5 @@
 #pragma once
 #include<iostream>
-#include "TList.h"
-#include "THeadList.h"
 using namespace std;
 struct TMonom
 {
@@ -20,7 +18,7 @@ public:
 		int xyz;
 		cout << "Coefficient: ";
 		in >> m.coef;
-		cout << endl << " Power: ";
+		cout << endl << "Power: ";
 		in >> xyz;
 		m.x = xyz / 100;
 		m.y = xyz / 10 % 10;
@@ -30,6 +28,7 @@ public:
 	friend ostream& operator<<(ostream& out, const TMonom& m)
 	{
 		out << m.coef << "(x^" << m.x << ")" << "(y^" << m.y << ")" << "(z^" << m.z << ")";
+		cout << endl;
 		return out;
 	}
 };

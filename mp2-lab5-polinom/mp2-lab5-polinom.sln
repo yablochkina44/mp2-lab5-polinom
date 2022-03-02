@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mp2-lab5-polinom", "mp2-lab5-polinom.vcxproj", "{7F1F2DD8-F1CD-4BF1-8C5B-DBA188D2638F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "..\Test\Test.vcxproj", "{4E7D73C0-569D-445C-8F51-C61C7B22A04A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{7F1F2DD8-F1CD-4BF1-8C5B-DBA188D2638F}.Release|x64.Build.0 = Release|x64
 		{7F1F2DD8-F1CD-4BF1-8C5B-DBA188D2638F}.Release|x86.ActiveCfg = Release|Win32
 		{7F1F2DD8-F1CD-4BF1-8C5B-DBA188D2638F}.Release|x86.Build.0 = Release|Win32
+		{4E7D73C0-569D-445C-8F51-C61C7B22A04A}.Debug|x64.ActiveCfg = Debug|x64
+		{4E7D73C0-569D-445C-8F51-C61C7B22A04A}.Debug|x64.Build.0 = Debug|x64
+		{4E7D73C0-569D-445C-8F51-C61C7B22A04A}.Debug|x86.ActiveCfg = Debug|Win32
+		{4E7D73C0-569D-445C-8F51-C61C7B22A04A}.Debug|x86.Build.0 = Debug|Win32
+		{4E7D73C0-569D-445C-8F51-C61C7B22A04A}.Release|x64.ActiveCfg = Release|x64
+		{4E7D73C0-569D-445C-8F51-C61C7B22A04A}.Release|x64.Build.0 = Release|x64
+		{4E7D73C0-569D-445C-8F51-C61C7B22A04A}.Release|x86.ActiveCfg = Release|Win32
+		{4E7D73C0-569D-445C-8F51-C61C7B22A04A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
