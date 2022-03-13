@@ -29,5 +29,11 @@
     <ClInclude Include="gtest.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="..\mp2-lab5-polinom\THeadList.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mp2-lab5-polinom\TPolinom.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

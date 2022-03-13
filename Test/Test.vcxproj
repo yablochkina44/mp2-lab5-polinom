@@ -144,6 +144,8 @@
     <ClCompile Include="test_tpolinom.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\mp2-lab5-polinom\THeadList.h" />
+    <ClInclude Include="..\mp2-lab5-polinom\TPolinom.h" />
     <ClInclude Include="gtest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

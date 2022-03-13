@@ -2,12 +2,12 @@
 
 #include "gtest.h"
 
-//TEST(TVector, can_create_vector_with_positive_length)
-//{
-//  ASSERT_NO_THROW(TVector<int> v(5));
-//}
-//
-//
+TEST(TPolinom, can_create_vector_with_positive_length)
+{
+  ASSERT_NO_THROW(TPolinom polinom);
+}
+
+
 //TEST(TVector, copied_vector_is_equal_to_source_one)
 //{
 //	//скопированный вектор равен исходному
