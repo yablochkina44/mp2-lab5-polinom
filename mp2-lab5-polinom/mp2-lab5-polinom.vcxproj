@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7f1f2dd8-f1cd-4bf1-8c5b-dba188d2638f}</ProjectGuid>
+    <ProjectGuid>{6d5a4949-5f3d-48d1-8274-3185d4f9b66e}</ProjectGuid>
     <RootNamespace>mp2lab5polinom</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -140,10 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="MyException.h" />
-    <ClInclude Include="TDataCom.h" />
-    <ClInclude Include="THeadList.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="THeadList.h" />
     <ClInclude Include="TList.h" />
     <ClInclude Include="TMonom.h" />
     <ClInclude Include="TNode.h" />

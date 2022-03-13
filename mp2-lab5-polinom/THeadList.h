@@ -18,12 +18,11 @@ public:
 		pStop = pHead;
 		pHead->pNext = pStop;
 		pFirst = pLast = pCurr = pPrevCurr = pStop;
-		pos = -1;
 		len = 0;
 	}
-	~THeadList()
+	~THeadList()//??
 	{
-		if (len != 0)
+		/*if (len != 0)
 		{
 			pCurr = pFirst;
 			while (pCurr != pStop)
@@ -32,7 +31,7 @@ public:
 				pCurr = pCurr->pNext;
 				delete del;
 			}
-		}
+		}*/
 		delete pHead;
 	}
 

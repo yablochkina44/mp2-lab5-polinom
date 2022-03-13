@@ -14,14 +14,13 @@ protected:
 	TNode<T>* pLast;		//указатель на последний элемент
 	TNode<T>* pStop;		//указатель на голову в циклическом списке
 	int len;				//длина списка
-	int pos;				//номер текущего элемента
+	
 
 public:
 	TList()
 	{
 		
 		pFirst = pLast = pCurr = pPrevCurr = pStop=NULL;
-		pos = -1;
 		len = 0;
 	}
 	~TList()
@@ -33,20 +32,9 @@ public:
 			delete tmp;
 			tmp = pFirst;
 		}
-
-		/*if (len != 0)
-		{
-			pCurr = pFirst;
-			while (pCurr != pStop)
-			{
-				TNode<T>* del = pCurr;
-				pCurr = pCurr->pNext;
-				delete del;
-			}
-		}*/
 	}
 
-	/*TList(const TList<T>& c)
+	TList(const TList<T>& c)
 	{
 		TNode<T>* tmp = c.pFirst;
 		if (tmp == pStop)
@@ -59,7 +47,7 @@ public:
 			tmp = tmp->pNext;
 		}
 		delete tmp;
-	}*/
+	}
 
 
 	void Reset();
@@ -70,13 +58,11 @@ public:
 
 	T GetValueCurrent();
 	void SetValueCurrent(T v);
-	void SetCurrPos(int _pos);
-
-	void InsFirst(T val);
+	
+	void InsFirst(const T& a);
 	void InsLast(T val);
 	void InsCurrent(T val);
 	
-	void DeleteList();
 	void DeleteCurrent();
 	void DeleteFirst();
 };
@@ -88,12 +74,12 @@ inline void TList<T>::Reset()
 	if (IsListEmpty())
 	{
 		pCurr = pStop;
-		pos = -1;
+		
 	}
 	else
 	{
 		pCurr = pFirst;
-		pos = 0;
+		
 
 	}
 
@@ -104,7 +90,7 @@ void TList<T>::GoNext()
 {
 	pPrevCurr = pCurr;
 	pCurr = pCurr->pNext;
-	pos++;
+	
 }
 
 template<class T>
@@ -133,41 +119,23 @@ void TList<T>::SetValueCurrent(T v)
 		pCurr->value = v;
 }
 
-template<class T>
-void TList<T>::SetCurrPos(int _pos)
+
+template <class T>
+void TList<T>::InsFirst(const T& a)
 {
-	Reset();
-	for (int i = 0; i < _pos; i++)
-		GoNext();
-
-}
-
-
-//с лекции переписано 
-template<class T>
-void TList<T>::InsFirst(T val)
-{
-	TNode<T>* tmp = new TNode<T>;
-	tmp->value = val;
+	TNode<T>* tmp;
+	tmp = new TNode<T>;
 	tmp->pNext = pFirst;
-	if (tmp == NULL)
-		throw MyException("List empty");
-	else
-	{
-		pFirst = tmp;
-		len++;
-		//проверка пустоты списка перед вставкой
-		if (len == 1)
-		{
-			pLast = tmp;
-			Reset();
-		}
-		//корректировка текущей позиции - отличие обработки для начала списка
-		else if (pos == 0)
-			pCurr = tmp;
-		else
-			pos++;
+	tmp->value = a;
+	if (pFirst == pStop) {
+		pLast = pFirst = tmp;
 	}
+	else {
+		pFirst = tmp;
+	}
+	len++;
+
+
 	/* на  паре писали
 	TNode<T>* tmp = new TNode<T>;
 	tmp->value = val;
@@ -179,6 +147,7 @@ void TList<T>::InsFirst(T val)
 	len++;*/
 
 }
+
 
 template<class T>
 void TList<T>::InsLast(T val)
@@ -200,7 +169,7 @@ void TList<T>::InsCurrent(T val)
 	if (pCurr == pFirst)
 		InsFirst(val);
 	else if (pPrevCurr == pLast)
-		InsLast(val);
+		InsLast(val);//???
 	else
 	{
 		TNode<T>* pNew = new TNode<T>;
@@ -214,56 +183,38 @@ void TList<T>::InsCurrent(T val)
 }
 
 template<class T>
-void TList<T>::DeleteList()
-{
-	while (!IsListEmpty)
-	{
-		DeleteFirst();
-	}
-	pFirst = pLast = pCurr = pPrevCurr = pStop;
-	pos = -1;
-}
-
-template<class T>
 void TList<T>::DeleteCurrent()
 {
 
 	if (pCurr == pStop) throw MyException("Error DelCurr: Stop");
 	if (pCurr == pFirst)
 		DeleteFirst();
-	else
+	else 
 	{
-		pPrevCurr->pNext = pCurr->pNext;
-		delete pCurr;
-		pCurr = pPrevCurr->pNext;
+		TNode<T>* tmp = pCurr;
+		pCurr = pCurr->pNext;
+		pPrevCurr->pNext = pCurr;
+		delete tmp;
 		len--;
 	}
 	
 
 }
 
-//с лекции
 template<class T>
 void TList<T>::DeleteFirst()
 {
-	if (IsListEmpty())
-		MyException("List empty");
-	else
+	
+	if (pFirst != pStop)
 	{
 		TNode<T>* tmp = pFirst;
 		pFirst = pFirst->pNext;
 		delete tmp;
 		len--;
-		if (IsListEmpty())
-		{
-			pLast = pStop;
-			Reset();
-		}
-		else if (pos == 0)
-			pCurr = pFirst;
-		else if (pos == 1)
-			pPrevCurr = pStop;
-		if (pos > 0)
-			pos--;
+	}
+	if (IsListEmpty())
+	{
+		throw MyException("List is Empty");
+		//pLast = pStop;
 	}
 }

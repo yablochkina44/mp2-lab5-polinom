@@ -14,34 +14,23 @@ public:
 		pHead->value.z = -1;
 	}
 
-	TPolinom(int** arr, int size) : THeadList<TMonom>() {
-		pHead->value.z = -1;
-		for (int i = 0; i < size; i++) {
-			TMonom mon;
-			mon.coef = arr[i][0];
-			mon.x = arr[i][1] / 100;
-			mon.y = arr[i][1] / 10 % 10;
-			mon.z = arr[i][1] % 10;
-			AddMonom(mon);
-		}
-	}
-
-
-	/*TPolinom(int monoms[][2], int n) :THeadList<TMonom>() {
+	TPolinom(int monoms[][2], int n) :THeadList<TMonom>() {
 		pHead->value.coef = 0;
 		pHead->value.x = 0;
 		pHead->value.y = 0;
 		pHead->value.z = -1;
-		TMonom M;
+		TMonom m;
 		for (int i = 0; i < n; i++)
 		{
-			M.coef = monoms[i][0];
-			M.z = monoms[i][1] % 10;
-			M.x = monoms[i][1] / 100;
-			M.y = monoms[i][1] / 10 % 10;
-			InsLast(M);
+			m.coef = monoms[i][0];
+			m.z = monoms[i][1] % 10;
+			m.x = monoms[i][1] / 100;
+			m.y = monoms[i][1] / 10 % 10;
+			InsLast(m);
 		}
-	}*/
+	}
+
+
 	TPolinom(TPolinom& p) : THeadList<TMonom>() {
 		pHead->value.coef = 0;
 		pHead->value.x = 0;
@@ -54,6 +43,8 @@ public:
 			InsLast(m);
 		}
 	}
+	
+	
 	//на паре вставляем в конец в посл цикле
 	void AddMonom(const TMonom& m) {
 		int flag = 0;
@@ -126,7 +117,7 @@ public:
 		}
 		return res;
 	}
-	TPolinom& operator+=(TMonom& mon)
+	/*TPolinom& operator+=(TMonom& mon)
 	{
 		if (mon.coef)
 		{
@@ -155,10 +146,55 @@ public:
 			InsLast(mon);
 		}
 		return *this;
+	}*/
+
+	bool TPolinom::operator==(TPolinom& p)
+	{
+		int flag = 0;
+		p.Reset();
+		for (Reset(); !IsListEnded(); GoNext())
+		{
+			if (pCurr->value.coef != p.pCurr->value.coef)
+			{
+				flag++;
+			}
+			else
+			{
+				if (pCurr->value != p.pCurr->value)
+				{
+					flag++;
+				}
+			}
+			p.GoNext();
+		}
+		Reset();
+		for (p.Reset(); !p.IsListEnded(); p.GoNext())
+		{
+			if (p.pCurr->value.coef != pCurr->value.coef)
+			{
+				flag++;
+			}
+			else
+			{
+				if (p.pCurr->value != pCurr->value)
+				{
+					flag++;
+				}
+			}
+			GoNext();
+		}
+		if (flag > 0)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 
 
-	void operator +=(TPolinom& Q) {
+	TPolinom& operator +=(TPolinom& Q) {
 		TMonom pm, qm, rm;
 		Reset();
 		Q.Reset();
@@ -195,8 +231,10 @@ public:
 			}
 
 		}
-
+		return *this;
 	}
+
+
 	TPolinom operator +(TPolinom& p)
 	{
 		TPolinom res(*this);
@@ -245,24 +283,17 @@ public:
 		return tmp;
 	}*/
 
-	
-
-
-	friend istream& operator>>(istream& in, TPolinom& p) {
-		TMonom mon;
-		double coeff = 1;
-		int px = 0, py = 0, pz = 0;
-		while (coeff != 0)
-		{
-			in >> coeff >> px >> py >> pz;
-			mon.coef = coeff;
-			mon.x = px;
-			mon.y = py;
-			mon.z = pz;
-			p += mon;
+	friend istream& operator>>(istream& in, TPolinom& p)
+	{
+		TMonom m;
+		in >> m;
+		while (m.coef != 0) {
+			p.AddMonom(m);
+			in >> m;
 		}
 		return in;
 	}
+
 	friend ostream& operator<<(ostream& out, TPolinom& p)
 	{
 		for (p.Reset(); !p.IsListEnded(); p.GoNext()) {

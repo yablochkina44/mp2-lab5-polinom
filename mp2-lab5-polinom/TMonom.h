@@ -27,8 +27,7 @@ public:
 	}
 	friend ostream& operator<<(ostream& out, const TMonom& m)
 	{
-		out << m.coef << "(x^" << m.x << ")" << "(y^" << m.y << ")" << "(z^" << m.z << ")";
-		cout << endl;
+		out << m.coef << "(x^" << m.x << ")" << "(y^" << m.y << ")" << "(z^" << m.z << ")\n";
 		return out;
 	}
 };
