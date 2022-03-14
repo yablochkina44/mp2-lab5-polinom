@@ -164,3 +164,75 @@ TEST(TPolinom, can_multiply_polinom_and_nu)
 	EXPECT_TRUE(p2 == p1);
 
 }
+
+
+
+
+//test monom
+TEST(TMonom, can_create_monom)
+{
+	ASSERT_NO_THROW(TMonom m);
+}
+
+TEST(TMonom, can_ins_monom_with_pos_coef)
+{
+	TMonom m;
+	m.x = 0;
+	m.y = 0;
+	m.z = 0;
+	ASSERT_NO_THROW(m.coef = 1);
+}
+
+TEST(TMonom, can_ins_monom_with_neg_coef)
+{
+	TMonom m;
+	m.x = 0;
+	m.y = 0;
+	m.z = 0;
+	ASSERT_NO_THROW(m.coef = -1);
+}
+
+
+
+TEST(TMonom, can_compare_the_monom)
+{
+	TMonom m1, m2;
+	m1.coef = 5;
+	m1.x = 1;
+	m1.y = 1;
+	m1.z = 1;
+	m2.coef = 7;
+	m2.x = 1;
+	m2.y = 1;
+	m2.z = 1;
+	EXPECT_EQ(m1 == m2, 1);
+}
+
+TEST(TMonom, can_compare_the_monoms)
+{
+	TMonom m1, m2;
+	m1.coef = 5;
+	m1.x = 1;
+	m1.y = 1;
+	m1.z = 1;
+	m2.coef = 7;
+	m2.x = 1;
+	m2.y = 2;
+	m2.z = 3;
+	EXPECT_EQ(m1 != m2, true);
+}
+
+TEST(TMonom, can_compare)
+{
+	TMonom m1, m2;
+	m1.coef = 5;
+	m1.x = 1;
+	m1.y = 1;
+	m1.z = 1;
+	m2.coef = 7;
+	m2.x = 1;
+	m2.y = 2;
+	m2.z = 3;
+	EXPECT_EQ(m1 < m2, true);
+	EXPECT_EQ(m1 > m2, false);
+}
