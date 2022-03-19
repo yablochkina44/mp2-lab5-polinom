@@ -110,8 +110,9 @@ TEST(TPolinom, can_add_polinoms_without_abbreviations)
 	
 }
 
-TEST(TPolinom, can_add_polinoms_with_the_abbreviation)
+TEST(TPolinom, abbreviation_first)
 {
+	//сокращается m and m1
 	TPolinom p1, p2, p3;
 	TMonom m2,m1,m, m0;
 	m.coef = 10;
@@ -136,15 +137,258 @@ TEST(TPolinom, can_add_polinoms_with_the_abbreviation)
 
 	p1.AddMonom(m);
 	p1.AddMonom(m0);
+	p1.AddMonom(m0);
+
 	p2.AddMonom(m1);
 	p2.AddMonom(m0);
+	p2.AddMonom(m0);
+
+	p3.AddMonom(m2);
+	p3.AddMonom(m2);
+	p1 += p2;
+	EXPECT_TRUE(p3 == p1);
+
+}
+
+TEST(TPolinom, abbreviation_average)
+{
+	//сокращается m and m1
+	TPolinom p1, p2, p3;
+	TMonom m2, m1, m, m0;
+	m.coef = 10;
+	m.x = 1;
+	m.y = 1;
+	m.z = 1;
+
+	m1.coef = -10;
+	m1.x = 1;
+	m1.y = 1;
+	m1.z = 1;
+
+	m0.coef = 20;
+	m0.x = 2;
+	m0.y = 2;
+	m0.z = 2;
+
+	m2.coef = 40;
+	m2.x = 2;
+	m2.y = 2;
+	m2.z = 2;
+
+	
+	p1.AddMonom(m0);
+	p1.AddMonom(m);
+	p1.AddMonom(m0);
+
+	
+	p2.AddMonom(m0);
+	p2.AddMonom(m1);
+	p2.AddMonom(m0);
+
+	p3.AddMonom(m2);
+	p3.AddMonom(m2);
+	p1 += p2;
+	EXPECT_TRUE(p3 == p1);
+
+}
+
+TEST(TPolinom, abbreviation_last)
+{
+	//сокращается m and m1
+	TPolinom p1, p2, p3;
+	TMonom m2, m1, m, m0;
+	m.coef = 10;
+	m.x = 1;
+	m.y = 1;
+	m.z = 1;
+
+	m1.coef = -10;
+	m1.x = 1;
+	m1.y = 1;
+	m1.z = 1;
+
+	m0.coef = 20;
+	m0.x = 2;
+	m0.y = 2;
+	m0.z = 2;
+
+	m2.coef = 40;
+	m2.x = 2;
+	m2.y = 2;
+	m2.z = 2;
+
+
+	p1.AddMonom(m0);
+	p1.AddMonom(m0);
+	p1.AddMonom(m);
+
+	p2.AddMonom(m0);
+	p2.AddMonom(m0);
+	p2.AddMonom(m1);
+
+	p3.AddMonom(m2);
+	p3.AddMonom(m2);
+	p1 += p2;
+	EXPECT_TRUE(p3 == p1);
+
+}
+
+TEST(TPolinom, abbreviation_first_and_last)
+{
+	//сокращается m and m1,  m3 and m4
+	TPolinom p1, p2, p3;
+	TMonom m2, m1, m, m0,m3,m4,m5;
+	m.coef = 10;
+	m.x = 1;
+	m.y = 1;
+	m.z = 1;
+
+	m1.coef = -10;
+	m1.x = 1;
+	m1.y = 1;
+	m1.z = 1;
+
+	m3.coef = 20;
+	m3.x = 2;
+	m3.y = 2;
+	m3.z = 2;
+
+	m4.coef = -20;
+	m4.x = 2;
+	m4.y = 2;
+	m4.z = 2;
+
+	m5.coef = 30;
+	m5.x = 3;
+	m5.y = 3;
+	m5.z = 3;
+
+	m2.coef = 60;
+	m2.x = 3;
+	m2.y = 3;
+	m2.z = 3;
+
+
+	p1.AddMonom(m);
+	p1.AddMonom(m5);
+	p1.AddMonom(m3);
+
+	p2.AddMonom(m1);
+	p2.AddMonom(m5);
+	p2.AddMonom(m4);
 
 	p3.AddMonom(m2);
 	p1 += p2;
 	EXPECT_TRUE(p3 == p1);
 
 }
-TEST(TPolinom, can_multiply_polinom_and_nu)
+
+TEST(TPolinom, abbreviation_first_and_average)
+{
+	//сокращается m and m1,  m3 and m4
+	TPolinom p1, p2, p3;
+	TMonom m2, m1, m, m0, m3, m4, m5;
+	m.coef = 10;
+	m.x = 1;
+	m.y = 1;
+	m.z = 1;
+
+	m1.coef = -10;
+	m1.x = 1;
+	m1.y = 1;
+	m1.z = 1;
+
+	m3.coef = 20;
+	m3.x = 2;
+	m3.y = 2;
+	m3.z = 2;
+
+	m4.coef = -20;
+	m4.x = 2;
+	m4.y = 2;
+	m4.z = 2;
+
+	m5.coef = 30;
+	m5.x = 3;
+	m5.y = 3;
+	m5.z = 3;
+
+	m2.coef = 60;
+	m2.x = 3;
+	m2.y = 3;
+	m2.z = 3;
+
+
+	p1.AddMonom(m);
+	p1.AddMonom(m3);
+	p1.AddMonom(m5);
+	
+
+	p2.AddMonom(m1);
+	p2.AddMonom(m4);
+	p2.AddMonom(m5);
+	
+
+	p3.AddMonom(m2);
+	p1 += p2;
+	EXPECT_TRUE(p3 == p1);
+
+}
+
+TEST(TPolinom, abbreviation_last_and_average)
+{
+	//сокращается m and m1,  m3 and m4
+	TPolinom p1, p2, p3;
+	TMonom m2, m1, m, m0, m3, m4, m5;
+	m.coef = 10;
+	m.x = 1;
+	m.y = 1;
+	m.z = 1;
+
+	m1.coef = -10;
+	m1.x = 1;
+	m1.y = 1;
+	m1.z = 1;
+
+	m3.coef = 20;
+	m3.x = 2;
+	m3.y = 2;
+	m3.z = 2;
+
+	m4.coef = -20;
+	m4.x = 2;
+	m4.y = 2;
+	m4.z = 2;
+
+	m5.coef = 30;
+	m5.x = 3;
+	m5.y = 3;
+	m5.z = 3;
+
+	m2.coef = 60;
+	m2.x = 3;
+	m2.y = 3;
+	m2.z = 3;
+
+
+	p1.AddMonom(m5);
+	p1.AddMonom(m);
+	p1.AddMonom(m3);
+	
+
+	p2.AddMonom(m5);
+	p2.AddMonom(m1);
+	p2.AddMonom(m4);
+	
+
+
+	p3.AddMonom(m2);
+	p1 += p2;
+	EXPECT_TRUE(p3 == p1);
+
+}
+
+TEST(TPolinom, can_multiply_polinom_and_num)
 {
 	TPolinom p1, p2;
 	TMonom m, m0;
